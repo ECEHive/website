@@ -3,7 +3,6 @@ name: "Test & Measurement"
 category: "Electronics"
 description: "Oscilloscopes, function generators, bench power supplies, LCR meters, network analyzers, and more from Keysight, Keithley, and Tektronix."
 icon: "heroicons:signal"
-difficulty: "Intermediate"
 featured: false
 order: 2
 ---

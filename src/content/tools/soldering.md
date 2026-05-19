@@ -3,7 +3,6 @@ name: "Soldering & PCB Rework"
 category: "Electronics"
 description: "Soldering irons, hot-air rework stations, and a full suite of hand tools for electronics assembly, repair, and prototyping."
 icon: "heroicons:bolt"
-difficulty: "Beginner"
 featured: true
 order: 1
 ---

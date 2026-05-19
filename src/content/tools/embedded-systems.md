@@ -3,12 +3,11 @@ name: "Embedded Systems"
 category: "Embedded Systems"
 description: "Microcontrollers, single-board computers, sensors, and actuators for IoT, robotics, and electronics projects."
 icon: "heroicons:cpu-chip"
-difficulty: "Beginner"
 featured: false
 order: 1
 ---
 
-The Hive has a large selection of electronics available for checkout at the front desk. Items are loaned for a **two-week period**, with renewals typically allowed.
+The Hive has a large selection of electronics available for checkout at the front desk. Items are allowed to be used while in the space, and must be returned before leaving.
 
 ## Available for Checkout
 

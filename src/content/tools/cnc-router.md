@@ -3,7 +3,6 @@ name: "Machine Shop"
 category: "Machine Shop"
 description: "A fully equipped machine shop on the first floor with power tools and hand tools for woodworking and structural fabrication. Most power tools require SUMS access."
 icon: "heroicons:wrench-screwdriver"
-difficulty: "Intermediate"
 featured: false
 order: 1
 ---

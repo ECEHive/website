@@ -3,7 +3,6 @@ name: "Vinyl Cutter"
 category: "Crafts & Textiles"
 description: "Three Silhouette Cameo vinyl cutters for stickers, decals, heat-transfer vinyl, cardstock, and stencil cutting. Design with Silhouette Studio software."
 icon: "heroicons:scissors"
-difficulty: "Beginner"
 featured: false
 order: 1
 ---
