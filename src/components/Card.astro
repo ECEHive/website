@@ -1,0 +1,39 @@
+---
+/**
+ * Card — generic content card with optional link behaviour.
+ *
+ * Props:
+ *  href    — makes the whole card clickable
+ *  class   — extra wrapper classes
+ *  padding — 'normal' | 'tight' | 'none'
+ */
+interface Props {
+  href?: string;
+  class?: string;
+  padding?: "normal" | "tight" | "none";
+}
+
+const { href, class: extraClass = "", padding = "normal" } = Astro.props;
+
+const padClasses: Record<string, string> = {
+  normal: "p-6",
+  tight: "p-4",
+  none: "",
+};
+
+const baseClasses = `rounded-2xl bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10
+  shadow-sm hover:shadow-md dark:hover:shadow-black/20 transition-shadow duration-200
+  ${padClasses[padding]} ${extraClass}`;
+---
+
+{
+  href ? (
+    <a href={href} class={`block ${baseClasses} group`}>
+      <slot />
+    </a>
+  ) : (
+    <div class={baseClasses}>
+      <slot />
+    </div>
+  )
+}

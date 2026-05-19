@@ -1,0 +1,94 @@
+---
+/**
+ * ToolCard — displays a single equipment/tool entry from the content collection.
+ *
+ * Props:
+ *  name            — tool display name
+ *  category        — equipment category label
+ *  description     — short description
+ *  icon            — emoji or SVG string
+ *  difficulty      — 'Beginner' | 'Intermediate' | 'Advanced'
+ *  requiresTraining — show training badge
+ *  slug            — URL slug for a detail page (optional)
+ */
+import Badge from "./Badge.astro";
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  name: string;
+  category: string;
+  description: string;
+  icon?: string;
+  difficulty?: "Beginner" | "Intermediate" | "Advanced";
+  requiresTraining?: boolean;
+  slug?: string;
+}
+
+const {
+  name,
+  category,
+  description,
+  icon = "🔧",
+  difficulty,
+  requiresTraining = false,
+  slug,
+} = Astro.props;
+
+const difficultyVariant: Record<string, "green" | "gold" | "red"> = {
+  Beginner: "green",
+  Intermediate: "gold",
+  Advanced: "red",
+};
+---
+
+<article
+  class="group flex flex-col rounded-2xl bg-white dark:bg-white/5
+         border border-gray-200 dark:border-white/10
+         shadow-sm hover:shadow-md dark:hover:shadow-black/20
+         hover:-translate-y-0.5 transition-all duration-200 overflow-hidden"
+>
+  <!-- Icon header -->
+  <div class="flex items-center justify-between px-6 pt-6 pb-4">
+    <span class="text-4xl leading-none select-none" aria-hidden="true"
+      >{icon}</span
+    >
+    <div class="flex flex-wrap gap-1.5 justify-end">
+      {
+        difficulty && (
+          <Badge variant={difficultyVariant[difficulty]}>{difficulty}</Badge>
+        )
+      }
+      {requiresTraining && <Badge variant="blue">Training Required</Badge>}
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="px-6 pb-6 flex flex-col flex-1">
+    <p
+      class="text-xs font-medium text-hive-purple dark:text-hive-purple-light uppercase tracking-wider mb-1"
+    >
+      {category}
+    </p>
+    <h3
+      class="font-heading font-bold text-lg text-gray-900 dark:text-white mb-2 leading-snug"
+    >
+      {name}
+    </h3>
+    <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed flex-1">
+      {description}
+    </p>
+
+    {
+      slug && (
+        <a
+          href={`/tools/${slug}`}
+          class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-hive-purple dark:text-hive-purple-light
+               hover:gap-2 transition-all duration-150"
+        >
+          Learn more
+          <Icon name="heroicons:arrow-right" class="w-4 h-4" />
+        </a>
+      )
+    }
+  </div>
+</article>

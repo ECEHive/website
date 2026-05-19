@@ -1,0 +1,225 @@
+---
+/**
+ * Hero — full-viewport hero section for the home page.
+ * Background: drone overview video (plays once, no audio).
+ * Typewriter: "A place for <word>" cycling through activities.
+ *
+ * The fixed navbar overlaps the top of this section. Content is vertically
+ * centered in the visible viewport area below the navbar (using flex layout
+ * + padding-top from --header-height).
+ */
+import Button from "./Button.astro";
+import { Icon } from "astro-icon/components";
+---
+
+<section
+  class="relative min-h-screen flex flex-col overflow-hidden bg-hive-dark text-white"
+  aria-label="Welcome to The Hive Makerspace"
+>
+  <!-- Background video (plays once, no loop) -->
+  <video
+    id="hero-video"
+    class="absolute inset-0 w-full h-full object-cover"
+    src="/drone_overview.mp4"
+    autoplay
+    muted
+    playsinline
+    aria-hidden="true"></video>
+
+  <!-- Dark gradient overlay so text stays readable over any video frame -->
+  <div
+    class="pointer-events-none absolute inset-0 bg-gradient-to-b
+           from-hive-dark/70 via-hive-dark/50 to-hive-dark/80"
+    aria-hidden="true"
+  >
+  </div>
+
+  <!-- Content: centered in viewport space below the navbar -->
+  <div
+    class="relative z-10 flex-1 flex items-center justify-center"
+    style="padding-top: var(--header-height, 88px)"
+  >
+    <div class="text-center px-4 sm:px-6 max-w-4xl mx-auto">
+      <!-- Main heading -->
+      <h1
+        class="font-heading text-5xl sm:text-6xl md:text-7xl font-black mb-4 leading-[1.05] tracking-tight"
+      >
+        The Hive<br />
+        Makerspace
+      </h1>
+
+      <!-- Typewriter line: "A place for <word>" -->
+      <p
+        class="font-heading text-2xl sm:text-3xl md:text-4xl font-light text-white/80 mb-6 h-14 flex items-center justify-center gap-2 flex-wrap"
+      >
+        <span class="text-white">A place for</span>
+        <span class="inline-flex items-center gap-0.5">
+          <span
+            id="typewriter"
+            class="text-hive-yellow font-semibold"
+            aria-live="polite"></span>
+          <span
+            class="inline-block w-[3px] h-[1em] bg-hive-yellow rounded-sm
+                   animate-[blink_1s_step-end_infinite]"
+            aria-hidden="true"></span>
+        </span>
+      </p>
+
+      <!-- Tagline -->
+      <p
+        class="text-lg sm:text-xl text-white max-w-2xl mx-auto mb-10 leading-relaxed"
+      >
+        Creating communities, building dreams. Georgia Tech's largest
+        makerspace, open to all students, faculty, and staff.
+      </p>
+
+      <!-- CTA buttons -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <Button href="/explore" size="lg" variant="secondary">
+          <Icon name="heroicons:clipboard-document-list" class="w-5 h-5" />
+          Explore Our Space
+        </Button>
+        <Button href="/about" size="lg" variant="outline-white">
+          Learn More
+        </Button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div
+    class="relative z-10 pb-8 flex flex-col items-center gap-2 text-white/40"
+  >
+    <span class="text-xs tracking-widest uppercase">Scroll</span>
+    <Icon name="heroicons:chevron-down" class="w-4 h-4 animate-bounce" />
+  </div>
+</section>
+
+<style>
+  @keyframes blink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+</style>
+
+<script>
+  // ── Typewriter: "A place for <word>" ──────────────────────────────────────
+  const phrases = [
+    "making",
+    "learning",
+    "building",
+    "designing",
+    "creating",
+    "innovating",
+    "collaborating",
+    "engineering",
+    "experimenting",
+  ];
+
+  const el = document.getElementById("typewriter");
+  if (el) {
+    let wordIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+
+    function tick() {
+      const word = phrases[wordIndex];
+      if (el) el.textContent = word.substring(0, charIndex);
+
+      let delay = isDeleting ? 50 : 100;
+
+      if (!isDeleting && charIndex === word.length) {
+        delay = 2000;
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        wordIndex = (wordIndex + 1) % phrases.length;
+        delay = 350;
+      }
+
+      charIndex += isDeleting ? -1 : 1;
+      setTimeout(tick, delay);
+    }
+
+    setTimeout(tick, 600);
+  }
+
+  // ── Video: play once, fail silently if autoplay is blocked ────────────────
+  const video = document.getElementById(
+    "hero-video",
+  ) as HTMLVideoElement | null;
+  video?.play().catch(() => {});
+</script>
+
+<style>
+  @keyframes blink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+</style>
+
+<script>
+  // ── Typewriter: "A place for <word>" ──────────────────────────────────
+  const phrases = [
+    "making",
+    "learning",
+    "building",
+    "designing",
+    "creating",
+    "innovating",
+    "collaborating",
+    "engineering",
+    "experimenting",
+  ];
+
+  const el = document.getElementById("typewriter");
+  if (el) {
+    let wordIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+
+    function tick() {
+      const word = phrases[wordIndex];
+      if (el) el.textContent = word.substring(0, charIndex);
+
+      let delay = isDeleting ? 50 : 100;
+
+      if (!isDeleting && charIndex === word.length) {
+        delay = 2000;
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        wordIndex = (wordIndex + 1) % phrases.length;
+        delay = 350;
+      }
+
+      charIndex += isDeleting ? -1 : 1;
+      setTimeout(tick, delay);
+    }
+
+    setTimeout(tick, 600);
+  }
+
+  // ── Video: play once, no loop ─────────────────────────────────────────
+  // The <video> element has no `loop` attribute, so it naturally stops
+  // at the end. We just ensure autoplay is triggered on page load.
+  const video = document.getElementById(
+    "hero-video",
+  ) as HTMLVideoElement | null;
+  if (video) {
+    video.play().catch(() => {
+      // Autoplay blocked (uncommon given muted); fail silently —
+      // the dark overlay + gradient fallback keep the section readable.
+    });
+  }
+</script>

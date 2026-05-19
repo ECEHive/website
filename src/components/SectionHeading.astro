@@ -1,0 +1,35 @@
+---
+/**
+ * SectionHeading — consistent heading + optional subtitle for page sections.
+ *
+ * Props:
+ *  subtitle — small label above the heading (e.g. "Our Space")
+ *  align    — 'left' | 'center'   (default: center)
+ */
+interface Props {
+  subtitle?: string;
+  align?: "left" | "center";
+  class?: string;
+}
+
+const { subtitle, align = "center", class: extraClass = "" } = Astro.props;
+---
+
+<div
+  class:list={[
+    "mb-12",
+    align === "center" ? "text-center" : "text-left",
+    extraClass,
+  ]}
+>
+  {
+    subtitle && (
+      <p class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-hive-purple dark:text-hive-purple-light mb-3">
+        <span class="w-4 h-px bg-hive-purple dark:bg-hive-purple-light" />
+        {subtitle}
+        <span class="w-4 h-px bg-hive-purple dark:bg-hive-purple-light" />
+      </p>
+    )
+  }
+  <slot />
+</div>

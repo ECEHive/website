@@ -1,0 +1,143 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* ─── Dark mode: class-based ─────────────────────────────────────────── */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ─── Design tokens ──────────────────────────────────────────────────── */
+@theme {
+  /* ── Core brand palette ─────────────────────────────────────────────
+   *  1. Primary Yellow   #FFE600
+   *  2. Dark Blue        #17238A
+   *  3. Cyan             #00D1FF
+   *  4. Red              #FF2F2F
+   *  5. Dark Blue-Gray   #00262F
+   * ─────────────────────────────────────────────────────────────────── */
+  --color-hive-yellow: #ffe600; /* Primary brand yellow (logo hex) */
+  --color-hive-yellow-dark: #ccb800; /* Darker yellow for hover/text on light */
+  --color-hive-blue: #17238a; /* Primary dark blue */
+  --color-hive-blue-light: #2d3eaa; /* Medium blue (gradient, hover) */
+  --color-hive-cyan: #00d1ff; /* Cyan accent */
+  --color-hive-cyan-dark: #00a8cc; /* Darker cyan */
+  --color-hive-red: #ff2f2f; /* Error / danger */
+  --color-hive-dark: #00262f; /* Dark background */
+  --color-hive-dark-lighter: #003344; /* Slightly lighter dark surface */
+
+  /* ── Semantic aliases (preserve existing Tailwind utility classes) ───
+   * Old names are remapped to the new brand values so no template files
+   * need touching for colour roles that carry over naturally.
+   * ─────────────────────────────────────────────────────────────────── */
+  --color-hive-purple: #17238a; /* → dark blue (primary interactive) */
+  --color-hive-purple-light: #00d1ff; /* → cyan (light accent on dark) */
+  --color-hive-purple-dark: #0d1a6e; /* → deeper blue (button hover) */
+  --color-hive-teal: #003344; /* → dark surface lighter */
+  --color-hive-teal-dark: #00262f; /* → dark bg */
+  --color-gt-gold: #ffe600; /* → brand yellow */
+  --color-gt-gold-light: #ffe866; /* → lighter yellow */
+  --color-gt-gold-dark: #ccb800; /* → darker yellow */
+
+  /* Fonts */
+  --font-heading: "Rubik", system-ui, sans-serif;
+  --font-body: "Sora", system-ui, sans-serif;
+}
+
+/* ─── Base layer ─────────────────────────────────────────────────────── */
+@layer base {
+  :root {
+    /* Fallback header height (announcement strip ~36px + pill ~80px + padding ~16px).
+       Navbar.astro JS overrides this immediately with the real measured value. */
+    --header-height: 132px;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-body);
+    @apply bg-white text-gray-900 antialiased;
+    @apply dark:bg-hive-teal-dark dark:text-gray-100;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-hive-blue;
+  }
+}
+
+/* ─── Utility: brand gradients ───────────────────────────────────────── */
+@layer utilities {
+  /* Blue → Cyan: used for hero sections, section headers */
+  .bg-hive-gradient {
+    background-image: linear-gradient(
+      135deg,
+      var(--color-hive-blue) 0%,
+      var(--color-hive-cyan) 100%
+    );
+  }
+
+  .bg-hive-gradient-r {
+    background-image: linear-gradient(
+      135deg,
+      var(--color-hive-cyan) 0%,
+      var(--color-hive-blue) 100%
+    );
+  }
+}
+
+/* ─── Hive prose color theme ────────────────────────────────────────────────────
+ * Used alongside the standard `prose` class:  class="prose prose-lg prose-hive dark:prose-invert"
+ * Defines all --tw-prose-* and --tw-prose-invert-* CSS variables consumed by
+ * @tailwindcss/typography so colors match the Hive brand.
+ * ─────────────────────────────────────────────────────────────────────────── */
+@utility prose-hive {
+  /* Light mode */
+  --tw-prose-body: var(--color-gray-700);
+  --tw-prose-headings: var(--color-hive-blue);
+  --tw-prose-lead: var(--color-gray-600);
+  --tw-prose-links: var(--color-hive-blue);
+  --tw-prose-bold: var(--color-gray-900);
+  --tw-prose-counters: var(--color-hive-blue);
+  --tw-prose-bullets: var(--color-hive-cyan-dark);
+  --tw-prose-hr: var(--color-gray-200);
+  --tw-prose-quotes: var(--color-gray-900);
+  --tw-prose-quote-borders: var(--color-hive-blue);
+  --tw-prose-captions: var(--color-gray-500);
+  --tw-prose-code: var(--color-hive-blue);
+  --tw-prose-pre-code: var(--color-gray-100);
+  --tw-prose-pre-bg: var(--color-hive-dark);
+  --tw-prose-th-borders: var(--color-gray-300);
+  --tw-prose-td-borders: var(--color-gray-200);
+
+  /* Dark mode (activated by `dark:prose-invert` on the same element) */
+  --tw-prose-invert-body: var(--color-gray-300);
+  --tw-prose-invert-headings: var(--color-hive-cyan);
+  --tw-prose-invert-lead: var(--color-gray-400);
+  --tw-prose-invert-links: var(--color-hive-cyan);
+  --tw-prose-invert-bold: #fff;
+  --tw-prose-invert-counters: var(--color-hive-cyan);
+  --tw-prose-invert-bullets: var(--color-hive-yellow);
+  --tw-prose-invert-hr: rgb(255 255 255 / 0.15);
+  --tw-prose-invert-quotes: var(--color-gray-100);
+  --tw-prose-invert-quote-borders: var(--color-hive-yellow);
+  --tw-prose-invert-captions: var(--color-gray-400);
+  --tw-prose-invert-code: var(--color-hive-cyan);
+  --tw-prose-invert-pre-code: var(--color-gray-300);
+  --tw-prose-invert-pre-bg: rgb(0 0 0 / 0.4);
+  --tw-prose-invert-th-borders: rgb(255 255 255 / 0.15);
+  --tw-prose-invert-td-borders: rgb(255 255 255 / 0.1);
+}
+
+html,
+body {
+  overflow-x: hidden;
+  overscroll-behavior-x: none;
+}

@@ -1,0 +1,47 @@
+---
+/**
+ * MDXLayout — used by MDX pages via frontmatter `layout` property.
+ * Receives the full frontmatter object through Astro.props.frontmatter.
+ */
+import PageLayout from "./PageLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import Section from "../components/Section.astro";
+
+interface Props {
+  frontmatter: {
+    title: string;
+    description?: string;
+    subtitle?: string;
+    /** Tailwind gradient classes e.g. "from-hive-blue to-hive-purple" */
+    heroGradient?: string;
+  };
+}
+
+const { frontmatter } = Astro.props;
+const gradient = frontmatter.heroGradient ?? "from-hive-blue to-hive-cyan";
+---
+
+<PageLayout title={frontmatter.title} description={frontmatter.description}>
+  <PageHero
+    title={frontmatter.title}
+    subtitle={frontmatter.subtitle}
+    gradient={gradient}
+  />
+
+  <!-- MDX body content -->
+  <Section class="py-16">
+    <div
+      class="prose prose-lg prose-hive dark:prose-invert max-w-4xl mx-auto
+             prose-headings:font-heading
+             prose-a:no-underline prose-a:hover:underline
+             prose-img:rounded-xl prose-img:shadow-md
+             prose-blockquote:border-hive-blue prose-blockquote:not-italic
+             prose-hr:border-gray-200 dark:prose-hr:border-white/10
+             prose-code:before:content-none prose-code:after:content-none
+             prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md
+             prose-code:bg-hive-blue/10 dark:prose-code:bg-hive-cyan/10"
+    >
+      <slot />
+    </div>
+  </Section>
+</PageLayout>

@@ -1,0 +1,147 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import Section from "../components/Section.astro";
+import ToolCard from "../components/ToolCard.astro";
+import PageHero from "../components/PageHero.astro";
+import { getCollection } from "astro:content";
+
+const allTools = await getCollection("tools");
+
+// Group tools by category, sorted by order within each group
+const categories = allTools.reduce<Record<string, typeof allTools>>(
+  (acc, tool) => {
+    const cat = tool.data.category;
+    if (!acc[cat]) acc[cat] = [];
+    acc[cat].push(tool);
+    return acc;
+  },
+  {},
+);
+
+// Sort categories and tools within each category
+const sortedCategories = Object.entries(categories)
+  .sort(([a], [b]) => a.localeCompare(b))
+  .map(([cat, tools]) => ({
+    name: cat,
+    slug: cat.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+    tools: tools.sort((a, b) => a.data.order - b.data.order),
+  }));
+---
+
+<PageLayout
+  title="Explore The Hive | Equipment & Tools"
+  description="Discover all the tools and equipment available at The Hive Makerspace — 3D printing, laser cutting, electronics, CNC routing, and more."
+>
+  <!-- Page header -->
+  <PageHero
+    eyebrow="Equipment & Tools"
+    title="Explore Our Space"
+    subtitle="From 3D printers to laser cutters to industrial sewing machines — if you can dream it, we probably have a tool for it."
+    gradient="from-hive-blue to-hive-cyan"
+  />
+
+  <!-- Category jump links -->
+  <div
+    class="sticky top-16 z-30 bg-white/90 dark:bg-hive-teal/90 backdrop-blur-sm border-b border-gray-200 dark:border-white/10"
+  >
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <nav
+        class="flex items-center gap-1 overflow-x-auto py-3 scrollbar-none"
+        aria-label="Equipment categories"
+      >
+        <a
+          href="#all"
+          data-filter="all"
+          class="filter-btn shrink-0 px-4 py-1.5 rounded-full text-sm font-medium transition-colors
+                 bg-hive-purple text-white"
+        >
+          All
+        </a>
+        {
+          sortedCategories.map((cat) => (
+            <a
+              href={`#${cat.slug}`}
+              data-filter={cat.slug}
+              class="filter-btn shrink-0 px-4 py-1.5 rounded-full text-sm font-medium transition-colors
+                   text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-white/10"
+            >
+              {cat.name}
+            </a>
+          ))
+        }
+      </nav>
+    </div>
+  </div>
+
+  <!-- Tool grids by category -->
+  {
+    sortedCategories.map((cat) => (
+      <Section id={cat.slug} tight>
+        <div class="mb-8">
+          <h2 class="font-heading text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">
+            {cat.name}
+          </h2>
+          <div class="w-12 h-1 rounded-full bg-hive-purple mt-2" />
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {cat.tools.map((tool) => (
+            <ToolCard
+              name={tool.data.name}
+              category={tool.data.category}
+              description={tool.data.description}
+              icon={tool.data.icon}
+              difficulty={tool.data.difficulty}
+              requiresTraining={tool.data.requiresTraining}
+            />
+          ))}
+        </div>
+      </Section>
+    ))
+  }
+
+  <!-- CTA -->
+  <Section class="bg-gray-50 dark:bg-white/[0.02]" tight>
+    <div class="max-w-2xl mx-auto text-center py-4">
+      <p class="text-gray-600 dark:text-gray-400 mb-4">
+        Don't see what you need? Reach out — we're always expanding our
+        equipment.
+      </p>
+      <a
+        href="mailto:hive@ece.gatech.edu"
+        class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-hive-purple text-hive-purple dark:border-hive-purple-light dark:text-hive-purple-light hover:bg-hive-purple hover:text-white dark:hover:bg-hive-purple-light dark:hover:text-white transition-colors text-sm font-medium"
+      >
+        Contact us about equipment
+      </a>
+    </div>
+  </Section>
+</PageLayout>
+
+<script>
+  // Smooth scroll active state for category nav
+  const filterBtns = document.querySelectorAll<HTMLElement>(".filter-btn");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          filterBtns.forEach((btn) => {
+            const isActive =
+              btn.dataset.filter === id ||
+              (btn.dataset.filter === "all" && !id);
+            btn.classList.toggle("bg-hive-purple", isActive);
+            btn.classList.toggle("text-white", isActive);
+            btn.classList.toggle("text-gray-600", !isActive);
+            btn.classList.toggle("dark:text-gray-400", !isActive);
+          });
+        }
+      }
+    },
+    { rootMargin: "-30% 0px -60% 0px" },
+  );
+
+  document
+    .querySelectorAll("section[id]")
+    .forEach((section) => observer.observe(section));
+</script>

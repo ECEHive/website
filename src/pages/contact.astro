@@ -1,0 +1,285 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import Section from "../components/Section.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import HoursDisplay from "../components/HoursDisplay.astro";
+import Button from "../components/Button.astro";
+import PageHero from "../components/PageHero.astro";
+import ContactDetail from "../components/ContactDetail.astro";
+import { Icon } from "astro-icon/components";
+import { getCollection, render } from "astro:content";
+import { detailedCurrentHours } from "../data/hours";
+import { idcStaff, execBoard, mpiGroups } from "../data/team";
+import { SITE } from "../data/site";
+
+const allFAQs = await getCollection("faq");
+const faqs = await Promise.all(
+  allFAQs
+    .sort((a, b) => a.data.order - b.data.order)
+    .map(async (faq) => {
+      const { Content } = await render(faq);
+      return { data: faq.data, Content };
+    }),
+);
+---
+
+<PageLayout
+  title="Contact The Hive | Makerspace at Georgia Tech"
+  description="Get in touch with The Hive Makerspace — location, hours, email, and FAQs."
+>
+  <!-- Page header -->
+  <PageHero
+    eyebrow="Get in Touch"
+    title="Contact Us"
+    subtitle="Have a question? Want to collaborate? Just want to say hi? We'd love to hear from you."
+    gradient="from-hive-dark to-hive-blue"
+  />
+
+  <!-- Contact info + hours -->
+  <Section>
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-16">
+      <!-- Left: contact details -->
+      <div>
+        <SectionHeading subtitle="Reach Us" align="left">
+          <h2
+            class="font-heading text-3xl font-bold text-gray-900 dark:text-white"
+          >
+            Get In Touch
+          </h2>
+        </SectionHeading>
+
+        <div class="space-y-6">
+          <ContactDetail icon="heroicons:envelope" label="Email">
+            <a
+              href={`mailto:${SITE.email}`}
+              class="text-lg font-medium text-gray-900 dark:text-white hover:text-hive-purple dark:hover:text-hive-purple-light transition-colors"
+            >
+              {SITE.email}
+            </a>
+          </ContactDetail>
+
+          <ContactDetail icon="heroicons:map-pin" label="Location">
+            <a
+              href={SITE.address.mapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-gray-900 dark:text-white hover:text-hive-purple dark:hover:text-hive-purple-light transition-colors"
+            >
+              <span class="text-lg font-medium">{SITE.address.building}</span
+              ><br />
+              <span class="text-gray-600 dark:text-gray-400"
+                >{SITE.address.street}</span
+              ><br />
+              <span class="text-gray-600 dark:text-gray-400"
+                >{SITE.address.city}, {SITE.address.state}
+                {SITE.address.zip}</span
+              >
+            </a>
+          </ContactDetail>
+
+          <ContactDetail icon="heroicons:bell" label="Stay Updated">
+            <p class="text-gray-700 dark:text-gray-300 mb-2">
+              Get weekly news, event RSVPs, and announcements.
+            </p>
+            <Button
+              href={SITE.mailingList}
+              external
+              size="sm"
+              variant="outline"
+            >
+              Subscribe to Newsletter
+            </Button>
+          </ContactDetail>
+        </div>
+      </div>
+
+      <!-- Right: hours -->
+      <div id="hours">
+        <SectionHeading subtitle="When We're Open" align="left">
+          <h2
+            class="font-heading text-3xl font-bold text-gray-900 dark:text-white"
+          >
+            Hours
+          </h2>
+        </SectionHeading>
+        <HoursDisplay
+          semester={detailedCurrentHours.semester}
+          period={detailedCurrentHours.period}
+          hours={detailedCurrentHours.hours}
+          note={detailedCurrentHours.note}
+        />
+        <p class="mt-4 text-sm text-gray-500 dark:text-gray-500">
+          Hours change each semester. Check the
+          <a
+            href={SITE.liveDashboard}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-hive-purple dark:text-hive-purple-light hover:underline"
+          >
+            Live Dashboard
+          </a>
+          for real-time status.
+        </p>
+      </div>
+    </div>
+  </Section>
+
+  <!-- Team section -->
+  <Section id="team" class="bg-gray-50 dark:bg-white/[0.02]">
+    <SectionHeading subtitle="Our People">
+      <h2
+        class="font-heading text-3xl md:text-4xl font-bold text-gray-900 dark:text-white"
+      >
+        Meet Our Team
+      </h2>
+      <p class="mt-3 text-gray-500 dark:text-gray-400 max-w-xl mx-auto">
+        While Peer Instructors keep the space open and running, the IDC has a
+        leadership team dedicated to the logistics of the space and planning for
+        further growth.
+      </p>
+    </SectionHeading>
+
+    <div class="max-w-4xl mx-auto space-y-10">
+      <!-- Student Executive Board -->
+      <div>
+        <h3
+          class="font-heading text-lg font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-4"
+        >
+          Student Executive Board
+        </h3>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {
+            execBoard.map((m) => (
+              <div class="rounded-xl border border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 px-5 py-4">
+                <p class="font-semibold text-gray-900 dark:text-white">
+                  {m.name}
+                </p>
+                <p class="text-sm text-gray-500 dark:text-gray-400">{m.role}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- IDC Staff -->
+      <div>
+        <h3
+          class="font-heading text-lg font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-4"
+        >
+          IDC Staff
+        </h3>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {
+            idcStaff.map((m) => (
+              <div class="rounded-xl border border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 px-5 py-4">
+                <p class="font-semibold text-gray-900 dark:text-white">
+                  {m.name}
+                </p>
+                <p class="text-sm text-gray-500 dark:text-gray-400">{m.role}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- MPIs -->
+      <div>
+        <h3
+          class="font-heading text-lg font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2"
+        >
+          Master Peer Instructors (MPIs)
+        </h3>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+          MPIs are volunteers who have specialized in a specific technical area.
+          If you have area-specific questions, reach out to them!
+        </p>
+        <div class="grid sm:grid-cols-2 gap-4">
+          {
+            mpiGroups.map((g) => (
+              <div class="rounded-xl border border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 px-5 py-4">
+                <p class="font-semibold text-gray-900 dark:text-white mb-1">
+                  {g.area}
+                </p>
+                <p class="text-sm text-gray-600 dark:text-gray-400">
+                  {g.mpis.join(", ")}
+                </p>
+                {g.contact && (
+                  <a
+                    href={`mailto:${g.contact}`}
+                    class="mt-2 inline-block text-xs text-hive-purple dark:text-hive-purple-light hover:underline"
+                  >
+                    {g.contact}
+                  </a>
+                )}
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </Section>
+
+  <!-- Map embed -->
+  <Section tight class="bg-gray-50 dark:bg-white/[0.02]">
+    <SectionHeading subtitle="Find Us">
+      <h2 class="font-heading text-3xl font-bold text-gray-900 dark:text-white">
+        We're on Campus
+      </h2>
+    </SectionHeading>
+    <div
+      class="rounded-2xl overflow-hidden border border-gray-200 dark:border-white/10 shadow-sm h-80"
+    >
+      <iframe
+        title="Map to The Hive Makerspace"
+        src={SITE.address.mapsEmbed}
+        class="w-full h-full"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        style="border:0"></iframe>
+    </div>
+  </Section>
+
+  <!-- FAQ -->
+  <Section id="faq">
+    <SectionHeading subtitle="Questions">
+      <h2
+        class="font-heading text-3xl md:text-4xl font-bold text-gray-900 dark:text-white"
+      >
+        Frequently Asked Questions
+      </h2>
+    </SectionHeading>
+
+    <div class="max-w-3xl mx-auto space-y-3">
+      {
+        faqs.map((faq) => (
+          <details class="group rounded-xl border border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 overflow-hidden">
+            <summary
+              class="flex items-center justify-between gap-4 px-6 py-4 cursor-pointer select-none
+                          font-heading font-semibold text-gray-900 dark:text-white hover:text-hive-purple dark:hover:text-hive-purple-light
+                          transition-colors list-none"
+            >
+              <span>{faq.data.question}</span>
+              <Icon
+                name="heroicons:chevron-down"
+                class="w-4 h-4 shrink-0 text-gray-400 group-open:rotate-180 transition-transform duration-200"
+              />
+            </summary>
+            <div class="px-6 pb-5 text-gray-600 dark:text-gray-400 text-sm leading-relaxed border-t border-gray-100 dark:border-white/5 pt-4">
+              <faq.Content />
+            </div>
+          </details>
+        ))
+      }
+    </div>
+
+    <p class="mt-8 text-center text-gray-500 dark:text-gray-500 text-sm">
+      Still have questions?
+      <a
+        href="mailto:hive@ece.gatech.edu"
+        class="text-hive-purple dark:text-hive-purple-light hover:underline ml-1"
+      >
+        Email us →
+      </a>
+    </p>
+  </Section>
+</PageLayout>

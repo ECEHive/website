@@ -1,0 +1,211 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import Hero from "../components/Hero.astro";
+import Section from "../components/Section.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import Button from "../components/Button.astro";
+import Card from "../components/Card.astro";
+import StatCard from "../components/StatCard.astro";
+import HoursDisplay from "../components/HoursDisplay.astro";
+import LiveDot from "../components/LiveDot.astro";
+import { Icon } from "astro-icon/components";
+import { stats, equipmentHighlights } from "../data/homepage";
+import { currentHours } from "../data/hours";
+import { SITE } from "../data/site";
+---
+
+<PageLayout
+  title="The Hive Makerspace | Georgia Tech IDC"
+  description="Creating communities, building dreams. Georgia Tech's Interdisciplinary Design Commons — open to all GT students, faculty, and staff."
+>
+  <!-- Hero -->
+  <Hero />
+
+  <!-- ── Stats strip ──────────────────────────────────────────────────────── -->
+  <div
+    class="bg-gray-50 dark:bg-white/[0.03] border-y border-gray-200 dark:border-white/10"
+  >
+    <div
+      class="max-w-7xl mx-auto px-4 sm:px-6 py-12 grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6"
+    >
+      {
+        stats.map((s) => (
+          <StatCard value={s.value} label={s.label} icon={s.icon} />
+        ))
+      }
+    </div>
+  </div>
+
+  <!-- ── About section ───────────────────────────────────────────────────── -->
+  <Section id="about">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <!-- Text -->
+      <div>
+        <p
+          class="text-xs font-semibold uppercase tracking-[0.15em] text-hive-purple dark:text-hive-purple-light mb-4 flex items-center gap-2"
+        >
+          <span class="w-5 h-px bg-hive-purple dark:bg-hive-purple-light"
+          ></span>
+          About The Hive
+        </p>
+        <h2
+          class="font-heading text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6 leading-tight"
+        >
+          A Place to Build<br />
+          <span class="text-hive-blue dark:text-hive-yellow">Anything.</span>
+        </h2>
+        <p
+          class="text-gray-600 dark:text-gray-400 text-lg leading-relaxed mb-4"
+        >
+          The Interdisciplinary Design Commons, better known as <strong
+            class="text-gray-900 dark:text-white">The Hive Makerspace</strong
+          >, is here to provide the Georgia Tech community with accessible
+          engineering space and resources to bring ideas to life in a
+          non-traditional classroom setting.
+        </p>
+        <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-8">
+          Our space is open to <strong class="text-gray-900 dark:text-white"
+            >all members of Georgia Tech</strong
+          > regardless of major, year, or experience. Whether you're a first-year
+          with a project idea or a PhD student building research hardware, we have
+          the tools and the community to support you.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <Button href="/about" variant="primary">Learn about The Hive</Button>
+          <Button href="/explore" variant="outline">Explore equipment →</Button>
+        </div>
+      </div>
+
+      <!-- Hours card -->
+      <div>
+        <HoursDisplay
+          semester={currentHours.semester}
+          period={currentHours.period}
+          hours={currentHours.hours}
+          note={currentHours.note}
+        />
+        <div class="mt-4 flex flex-col sm:flex-row gap-3">
+          <a
+            href={SITE.liveDashboard}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-gray-200 dark:border-white/10
+                   text-sm font-medium text-gray-700 dark:text-gray-300 hover:border-hive-purple hover:text-hive-purple
+                   dark:hover:border-hive-purple-light dark:hover:text-hive-purple-light transition-colors"
+          >
+            <LiveDot />
+            Live Dashboard
+          </a>
+          <Button href="/contact" variant="ghost" size="sm"
+            >Get directions →</Button
+          >
+        </div>
+      </div>
+    </div>
+  </Section>
+
+  <!-- ── Equipment highlights ────────────────────────────────────────────── -->
+  <Section id="equipment" class="bg-gray-50 dark:bg-white/[0.02]">
+    <SectionHeading subtitle="Our Space">
+      <h2
+        class="font-heading text-4xl md:text-5xl font-bold text-gray-900 dark:text-white"
+      >
+        What Can You Make?
+      </h2>
+      <p
+        class="mt-4 text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto"
+      >
+        From digital fabrication to hands-on crafts, the Hive has the tools to
+        bring any idea to life.
+      </p>
+    </SectionHeading>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {
+        equipmentHighlights.map((item) => (
+          <Card href={item.href} padding="normal" class="group">
+            <div class="text-4xl mb-4 leading-none">{item.icon}</div>
+            <h3 class="font-heading font-bold text-lg text-gray-900 dark:text-white mb-2">
+              {item.title}
+            </h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
+              {item.description}
+            </p>
+            <span class="inline-flex items-center gap-1 text-sm font-medium text-hive-purple dark:text-hive-purple-light group-hover:gap-2 transition-all">
+              Explore
+              <Icon name="heroicons:arrow-right" class="w-4 h-4" />
+            </span>
+          </Card>
+        ))
+      }
+    </div>
+
+    <div class="mt-10 text-center">
+      <Button href="/explore" size="lg" variant="primary"
+        >View All Equipment</Button
+      >
+    </div>
+  </Section>
+
+  <!-- ── Calendar ────────────────────────────────────────────────────────── -->
+  <Section id="calendar">
+    <SectionHeading subtitle="Events & Workshops">
+      <h2
+        class="font-heading text-4xl md:text-5xl font-bold text-gray-900 dark:text-white"
+      >
+        Our Calendar
+      </h2>
+      <p class="mt-4 text-lg text-gray-500 dark:text-gray-400 max-w-xl mx-auto">
+        To attend a workshop, RSVP using the link sent in our weekly newsletter.
+      </p>
+    </SectionHeading>
+
+    <div
+      class="rounded-2xl overflow-hidden border border-gray-200 dark:border-white/10 shadow-sm"
+    >
+      <iframe
+        src={SITE.calendarEmbed}
+        class="w-full min-h-[600px]"
+        title="The Hive Makerspace Calendar"
+        loading="lazy"
+        style="border:0"></iframe>
+    </div>
+
+    <p class="mt-6 text-center text-sm text-gray-500 dark:text-gray-500">
+      RSVPs are sent first via our{" "}
+      <a
+        href={SITE.mailingList}
+        class="text-hive-purple dark:text-hive-purple-light hover:underline"
+      >
+        weekly newsletter
+      </a>{" "}
+      — subscribe to get priority access.
+    </p>
+  </Section>
+
+  <!-- ── Get involved ────────────────────────────────────────────────────── -->
+  <Section class="bg-hive-gradient text-white">
+    <div class="text-center max-w-2xl mx-auto">
+      <h2 class="font-heading text-4xl md:text-5xl font-bold mb-4">
+        Ready to Start Making?
+      </h2>
+      <p class="text-white/70 text-lg mb-10">
+        Drop in during open hours with your BuzzCard, or reach out to learn how
+        to get involved.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <Button href="/contact" size="lg" variant="outline-white">
+          Contact Us
+        </Button>
+        <Button
+          href={SITE.mailingList}
+          external
+          size="lg"
+          variant="ghost-white"
+        >
+          Join the Mailing List →
+        </Button>
+      </div>
+    </div>
+  </Section>
+</PageLayout>
