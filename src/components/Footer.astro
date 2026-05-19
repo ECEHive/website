@@ -7,6 +7,9 @@ import { footerSections } from "../data/nav";
 import { SITE } from "../data/site";
 
 const year = new Date().getFullYear();
+const date = new Date().toLocaleDateString("en-US", {
+	timeZone: "America/New_York",
+});
 ---
 
 <footer
@@ -130,21 +133,9 @@ const year = new Date().getFullYear();
 				&copy; {year} The Hive Makerspace — Georgia Institute of Technology. All rights
 				reserved.
 			</p>
-			<div class="flex items-center gap-1 text-xs text-white/40">
-				<span>Built with</span>
-				<a
-					href="https://astro.build"
-					target="_blank"
-					rel="noopener noreferrer"
-					class="hover:text-white/70 transition-colors">Astro</a
-				>
-				<span>&amp;</span>
-				<a
-					href="https://tailwindcss.com"
-					target="_blank"
-					rel="noopener noreferrer"
-					class="hover:text-white/70 transition-colors">Tailwind</a
-				>
+			<div class="text-xs text-white/40">
+				<span>Last updated</span>
+				<span class="text-white/60">{date}</span>
 			</div>
 		</div>
 	</div>
