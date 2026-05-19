@@ -4,7 +4,6 @@ category: "Electronics"
 description: "Oscilloscopes, function generators, bench power supplies, LCR meters, network analyzers, and more from Keysight, Keithley, and Tektronix."
 icon: "heroicons:signal"
 difficulty: "Intermediate"
-requiresTraining: false
 featured: false
 order: 2
 ---

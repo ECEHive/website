@@ -4,7 +4,6 @@ category: "Laser Cutting"
 description: 'Two Universal Laser Systems CO₂ laser cutters (32"×18" bed) plus a Fablight 4500 fiber laser for cutting metals. Located in the production studio on the first floor.'
 icon: "heroicons:sun"
 difficulty: "Intermediate"
-requiresTraining: true
 featured: true
 order: 1
 ---

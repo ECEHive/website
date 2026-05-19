@@ -4,7 +4,6 @@ category: "PCB Fabrication"
 description: "In-house PCB fabrication using LPKF ProtoMat S103 (milling plotter) and LPKF ProtoLaser U4 (UV laser). Double-sided boards on FR4 substrate — free for GT students."
 icon: "heroicons:circle-stack"
 difficulty: "Advanced"
-requiresTraining: true
 featured: true
 order: 1
 ---

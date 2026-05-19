@@ -30,7 +30,6 @@ const {
 	description,
 	icon = "heroicons:wrench",
 	difficulty,
-	requiresTraining = false,
 	slug,
 } = Astro.props;
 
@@ -59,7 +58,6 @@ const difficultyVariant: Record<string, "green" | "gold" | "red"> = {
 					<Badge variant={difficultyVariant[difficulty]}>{difficulty}</Badge>
 				)
 			}
-			{requiresTraining && <Badge variant="blue">Training Required</Badge>}
 		</div>
 	</div>
 
