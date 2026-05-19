@@ -8,17 +8,17 @@
  *  padding — 'normal' | 'tight' | 'none'
  */
 interface Props {
-  href?: string;
-  class?: string;
-  padding?: "normal" | "tight" | "none";
+	href?: string;
+	class?: string;
+	padding?: "normal" | "tight" | "none";
 }
 
 const { href, class: extraClass = "", padding = "normal" } = Astro.props;
 
 const padClasses: Record<string, string> = {
-  normal: "p-6",
-  tight: "p-4",
-  none: "",
+	normal: "p-6",
+	tight: "p-4",
+	none: "",
 };
 
 const baseClasses = `rounded-2xl bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10
@@ -27,13 +27,13 @@ const baseClasses = `rounded-2xl bg-white dark:bg-white/5 border border-gray-200
 ---
 
 {
-  href ? (
-    <a href={href} class={`block ${baseClasses} group`}>
-      <slot />
-    </a>
-  ) : (
-    <div class={baseClasses}>
-      <slot />
-    </div>
-  )
+	href ? (
+		<a href={href} class={`block ${baseClasses} group`}>
+			<slot />
+		</a>
+	) : (
+		<div class={baseClasses}>
+			<slot />
+		</div>
+	)
 }

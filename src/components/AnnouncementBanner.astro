@@ -11,65 +11,65 @@
 import { Icon } from "astro-icon/components";
 
 interface Props {
-  message: string;
-  href?: string;
-  linkText?: string;
-  id?: string;
+	message: string;
+	href?: string;
+	linkText?: string;
+	id?: string;
 }
 
 const {
-  message,
-  href,
-  linkText = "Learn more →",
-  id = "announcement-banner",
+	message,
+	href,
+	linkText = "Learn more →",
+	id = "announcement-banner",
 } = Astro.props;
 ---
 
 <div
-  id={id}
-  class="w-full bg-hive-purple text-white text-sm py-2.5 px-4 flex items-center justify-center gap-3"
-  role="region"
-  aria-label="Announcement"
+	id={id}
+	class="w-full bg-hive-purple text-white text-sm py-2.5 px-4 flex items-center justify-center gap-3"
+	role="region"
+	aria-label="Announcement"
 >
-  <span
-    class="w-2 h-2 rounded-full bg-gt-gold animate-pulse shrink-0"
-    aria-hidden="true"></span>
-  <p class="text-center">
-    {message}
-    {
-      href && (
-        <a
-          href={href}
-          class="ml-2 font-semibold underline underline-offset-2 hover:text-gt-gold transition-colors"
-        >
-          {linkText}
-        </a>
-      )
-    }
-  </p>
-  <button
-    aria-label="Dismiss announcement"
-    class="ml-auto shrink-0 opacity-70 hover:opacity-100 transition-opacity p-0.5"
-    data-dismiss-banner={id}
-  >
-    <Icon name="heroicons:x-mark" class="w-4 h-4" />
-  </button>
+	<span
+		class="w-2 h-2 rounded-full bg-gt-gold animate-pulse shrink-0"
+		aria-hidden="true"></span>
+	<p class="text-center">
+		{message}
+		{
+			href && (
+				<a
+					href={href}
+					class="ml-2 font-semibold underline underline-offset-2 hover:text-gt-gold transition-colors"
+				>
+					{linkText}
+				</a>
+			)
+		}
+	</p>
+	<button
+		aria-label="Dismiss announcement"
+		class="ml-auto shrink-0 opacity-70 hover:opacity-100 transition-opacity p-0.5"
+		data-dismiss-banner={id}
+	>
+		<Icon name="heroicons:x-mark" class="w-4 h-4" />
+	</button>
 </div>
 
 <script>
-  document.querySelectorAll("[data-dismiss-banner]").forEach((btn) => {
-    const bannerId = (btn as HTMLElement).dataset.dismissBanner!;
-    const banner = document.getElementById(bannerId);
-    if (!banner) return;
+	document.querySelectorAll("[data-dismiss-banner]").forEach((btn) => {
+		const bannerId = (btn as HTMLElement).dataset.dismissBanner!;
+		const banner = document.getElementById(bannerId);
+		if (!banner) return;
 
-    // Check if already dismissed
-    if (sessionStorage.getItem(`dismissed:${bannerId}`)) {
-      banner.style.display = "none";
-    }
+		// Check if already dismissed
+		if (sessionStorage.getItem(`dismissed:${bannerId}`)) {
+			banner.style.display = "none";
+		}
 
-    btn.addEventListener("click", () => {
-      banner.style.display = "none";
-      sessionStorage.setItem(`dismissed:${bannerId}`, "1");
-    });
-  });
+		btn.addEventListener("click", () => {
+			banner.style.display = "none";
+			sessionStorage.setItem(`dismissed:${bannerId}`, "1");
+		});
+	});
 </script>

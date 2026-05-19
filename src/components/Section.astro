@@ -8,23 +8,23 @@
  *  class — extra classes applied to the outer <section>
  */
 interface Props {
-  id?: string;
-  tight?: boolean;
-  class?: string;
+	id?: string;
+	tight?: boolean;
+	class?: string;
 }
 
 const { id, tight = false, class: extraClass = "" } = Astro.props;
 ---
 
 <section
-  id={id}
-  class:list={[
-    "w-full",
-    tight ? "py-10 md:py-12" : "py-16 md:py-24",
-    extraClass,
-  ]}
+	id={id}
+	class:list={[
+		"w-full",
+		tight ? "py-10 md:py-12" : "py-16 md:py-24",
+		extraClass,
+	]}
 >
-  <div class="max-w-7xl mx-auto px-4 sm:px-6">
-    <slot />
-  </div>
+	<div class="max-w-7xl mx-auto px-4 sm:px-6">
+		<slot />
+	</div>
 </section>

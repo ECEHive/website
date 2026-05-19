@@ -14,425 +14,425 @@ const currentPath = Astro.url.pathname;
   JS sets --header-height on <html> so hero/page components can offset content.
 -->
 <div id="site-header" class="fixed top-0 left-0 right-0 z-50 flex flex-col">
-  <!-- ── Announcement strip ─────────────────────────────────────────────── -->
-  <!-- Hidden by default; JS reveals it only when active, within date range,
+	<!-- ── Announcement strip ─────────────────────────────────────────────── -->
+	<!-- Hidden by default; JS reveals it only when active, within date range,
        and not yet dismissed by the user. This prevents any layout flash. -->
-  <div
-    id="announcement-strip"
-    class="w-full bg-hive-blue text-white text-xs sm:text-sm py-2 px-4
+	<div
+		id="announcement-strip"
+		class="w-full bg-hive-blue text-white text-xs sm:text-sm py-2 px-4
            items-center justify-center gap-3"
-    style="display:none"
-    role="region"
-    aria-label="Announcement"
-    data-announcement={JSON.stringify(announcement)}
-  >
-    <span
-      class="w-1.5 h-1.5 rounded-full bg-hive-yellow animate-pulse shrink-0"
-      aria-hidden="true"></span>
-    <p class="text-center" id="announcement-text"></p>
-    <button
-      id="dismiss-announcement"
-      aria-label="Dismiss announcement"
-      class="ml-auto p-1 shrink-0 opacity-60 hover:opacity-100 transition-opacity rounded-md hover:bg-white/10"
-    >
-      <Icon name="heroicons:x-mark" class="w-4 h-4" />
-    </button>
-  </div>
+		style="display:none"
+		role="region"
+		aria-label="Announcement"
+		data-announcement={JSON.stringify(announcement)}
+	>
+		<span
+			class="w-1.5 h-1.5 rounded-full bg-hive-yellow animate-pulse shrink-0"
+			aria-hidden="true"></span>
+		<p class="text-center" id="announcement-text"></p>
+		<button
+			id="dismiss-announcement"
+			aria-label="Dismiss announcement"
+			class="ml-auto p-1 shrink-0 opacity-60 hover:opacity-100 transition-opacity rounded-md hover:bg-white/10"
+		>
+			<Icon name="heroicons:x-mark" class="w-4 h-4" />
+		</button>
+	</div>
 
-  <!-- ── Floating navbar pill ───────────────────────────────────────────── -->
-  <div class="px-3 sm:px-6 py-3">
-    <div class="max-w-7xl mx-auto">
-      <nav
-        class="rounded-2xl px-4 sm:px-5 h-14 flex items-center justify-between
+	<!-- ── Floating navbar pill ───────────────────────────────────────────── -->
+	<div class="px-3 sm:px-6 py-3">
+		<div class="max-w-7xl mx-auto">
+			<nav
+				class="rounded-2xl px-4 sm:px-5 h-14 flex items-center justify-between
                bg-white/80 dark:bg-hive-dark/80 backdrop-blur-xl
                border border-black/[0.06] dark:border-white/[0.08]
                shadow-[0_4px_24px_rgba(0,0,0,0.08)] dark:shadow-[0_4px_24px_rgba(0,0,0,0.4)]"
-        aria-label="Main navigation"
-      >
-        <!-- Logo -->
-        <a
-          href="/"
-          class="flex items-center shrink-0"
-          aria-label="The Hive Makerspace home"
-        >
-          <img
-            src="/hive_logo-light.svg"
-            alt="The Hive Makerspace"
-            class="h-8 w-auto block dark:hidden"
-            width="414"
-            height="147"
-          />
-          <img
-            src="/hive_logo-dark.svg"
-            alt="The Hive Makerspace"
-            class="h-8 w-auto hidden dark:block"
-            width="414"
-            height="147"
-          />
-        </a>
+				aria-label="Main navigation"
+			>
+				<!-- Logo -->
+				<a
+					href="/"
+					class="flex items-center shrink-0"
+					aria-label="The Hive Makerspace home"
+				>
+					<img
+						src="/hive_logo-light.svg"
+						alt="The Hive Makerspace"
+						class="h-8 w-auto block dark:hidden"
+						width="414"
+						height="147"
+					/>
+					<img
+						src="/hive_logo-dark.svg"
+						alt="The Hive Makerspace"
+						class="h-8 w-auto hidden dark:block"
+						width="414"
+						height="147"
+					/>
+				</a>
 
-        <!-- Desktop nav links -->
-        <ul class="hidden lg:flex items-center gap-0.5" role="list">
-          {
-            primaryNav.map((link) => {
-              const isActive =
-                currentPath === link.href ||
-                (link.href !== "/" && currentPath.startsWith(link.href));
-              return (
-                <li>
-                  <a
-                    href={link.href}
-                    aria-current={isActive ? "page" : undefined}
-                    class:list={[
-                      "px-3.5 py-2 rounded-xl text-sm font-medium transition-colors duration-150",
-                      isActive
-                        ? "text-hive-blue dark:text-hive-cyan bg-hive-blue/8 dark:bg-hive-cyan/10"
-                        : "text-gray-700 dark:text-gray-200 hover:text-hive-blue dark:hover:text-hive-cyan hover:bg-black/5 dark:hover:bg-white/10",
-                    ]}
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              );
-            })
-          }
+				<!-- Desktop nav links -->
+				<ul class="hidden lg:flex items-center gap-0.5" role="list">
+					{
+						primaryNav.map((link) => {
+							const isActive =
+								currentPath === link.href ||
+								(link.href !== "/" && currentPath.startsWith(link.href));
+							return (
+								<li>
+									<a
+										href={link.href}
+										aria-current={isActive ? "page" : undefined}
+										class:list={[
+											"px-3.5 py-2 rounded-xl text-sm font-medium transition-colors duration-150",
+											isActive
+												? "text-hive-blue dark:text-hive-cyan bg-hive-blue/8 dark:bg-hive-cyan/10"
+												: "text-gray-700 dark:text-gray-200 hover:text-hive-blue dark:hover:text-hive-cyan hover:bg-black/5 dark:hover:bg-white/10",
+										]}
+									>
+										{link.label}
+									</a>
+								</li>
+							);
+						})
+					}
 
-          <!-- More dropdown -->
-          <li class="relative" id="more-dropdown">
-            <button
-              id="more-dropdown-trigger"
-              class="px-3.5 py-2 rounded-xl text-sm font-medium flex items-center gap-1
+					<!-- More dropdown -->
+					<li class="relative" id="more-dropdown">
+						<button
+							id="more-dropdown-trigger"
+							class="px-3.5 py-2 rounded-xl text-sm font-medium flex items-center gap-1
                      text-gray-700 dark:text-gray-200
                      hover:text-hive-blue dark:hover:text-hive-cyan
                      hover:bg-black/5 dark:hover:bg-white/10
                      transition-colors duration-150"
-              aria-haspopup="true"
-              aria-expanded="false"
-              aria-controls="more-dropdown-menu"
-            >
-              More
-              <Icon
-                name="heroicons:chevron-down"
-                class="w-3.5 h-3.5 transition-transform duration-200"
-                id="more-dropdown-chevron"
-              />
-            </button>
-            <ul
-              id="more-dropdown-menu"
-              class="absolute right-0 top-[calc(100%+8px)] w-52 py-1.5 rounded-xl
+							aria-haspopup="true"
+							aria-expanded="false"
+							aria-controls="more-dropdown-menu"
+						>
+							More
+							<Icon
+								name="heroicons:chevron-down"
+								class="w-3.5 h-3.5 transition-transform duration-200"
+								id="more-dropdown-chevron"
+							/>
+						</button>
+						<ul
+							id="more-dropdown-menu"
+							class="absolute right-0 top-[calc(100%+8px)] w-52 py-1.5 rounded-xl
                      bg-white dark:bg-hive-dark-lighter
                      shadow-xl shadow-black/10 dark:shadow-black/40
                      border border-gray-100 dark:border-white/10
                      opacity-0 invisible pointer-events-none
                      -translate-y-1
                      transition-all duration-200 ease-out"
-              role="menu"
-            >
-              {
-                moreNav.map((link) => (
-                  <li role="menuitem">
-                    <a
-                      href={link.href}
-                      target={link.external ? "_blank" : undefined}
-                      rel={link.external ? "noopener noreferrer" : undefined}
-                      class="flex items-center gap-2 px-4 py-2 text-sm
+							role="menu"
+						>
+							{
+								moreNav.map((link) => (
+									<li role="menuitem">
+										<a
+											href={link.href}
+											target={link.external ? "_blank" : undefined}
+											rel={link.external ? "noopener noreferrer" : undefined}
+											class="flex items-center gap-2 px-4 py-2 text-sm
                            text-gray-700 dark:text-gray-300
                            hover:text-hive-blue dark:hover:text-hive-cyan
                            hover:bg-gray-50 dark:hover:bg-white/8
                            transition-colors duration-150"
-                    >
-                      {link.label}
-                      {link.external && (
-                        <Icon
-                          name="heroicons:arrow-top-right-on-square"
-                          class="w-3 h-3 opacity-40 ml-auto shrink-0"
-                        />
-                      )}
-                    </a>
-                  </li>
-                ))
-              }
-            </ul>
-          </li>
-        </ul>
+										>
+											{link.label}
+											{link.external && (
+												<Icon
+													name="heroicons:arrow-top-right-on-square"
+													class="w-3 h-3 opacity-40 ml-auto shrink-0"
+												/>
+											)}
+										</a>
+									</li>
+								))
+							}
+						</ul>
+					</li>
+				</ul>
 
-        <!-- Right: theme toggle + CTA + mobile button -->
-        <div class="flex items-center gap-1.5">
-          <!-- Theme toggle -->
-          <button
-            id="theme-toggle"
-            class="p-2 rounded-xl text-gray-500 dark:text-gray-400
+				<!-- Right: theme toggle + CTA + mobile button -->
+				<div class="flex items-center gap-1.5">
+					<!-- Theme toggle -->
+					<button
+						id="theme-toggle"
+						class="p-2 rounded-xl text-gray-500 dark:text-gray-400
                    hover:text-hive-blue dark:hover:text-hive-cyan
                    hover:bg-black/5 dark:hover:bg-white/10
                    transition-colors duration-150"
-            aria-label="Toggle dark mode"
-          >
-            <Icon name="heroicons:sun" class="w-5 h-5 hidden dark:block" />
-            <Icon name="heroicons:moon" class="w-5 h-5 block dark:hidden" />
-          </button>
+						aria-label="Toggle dark mode"
+					>
+						<Icon name="heroicons:sun" class="w-5 h-5 hidden dark:block" />
+						<Icon name="heroicons:moon" class="w-5 h-5 block dark:hidden" />
+					</button>
 
-          <!-- Live Dashboard CTA -->
-          <a
-            href={SITE.liveDashboard}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="hidden sm:inline-flex items-center gap-2 px-3.5 py-2 rounded-xl shrink-0
+					<!-- Live Dashboard CTA -->
+					<a
+						href={SITE.liveDashboard}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="hidden sm:inline-flex items-center gap-2 px-3.5 py-2 rounded-xl shrink-0
                    bg-hive-yellow text-hive-dark text-sm font-semibold
                    hover:bg-hive-yellow-dark transition-colors duration-150"
-          >
-            <LiveDot />
-            Live Dashboard
-          </a>
+					>
+						<LiveDot />
+						Live Dashboard
+					</a>
 
-          <!-- Mobile menu button -->
-          <button
-            id="mobile-menu-toggle"
-            class="lg:hidden p-2 rounded-xl text-gray-600 dark:text-gray-400
+					<!-- Mobile menu button -->
+					<button
+						id="mobile-menu-toggle"
+						class="lg:hidden p-2 rounded-xl text-gray-600 dark:text-gray-400
                    hover:bg-black/5 dark:hover:bg-white/10 transition-colors duration-150"
-            aria-label="Toggle menu"
-            aria-expanded="false"
-            aria-controls="mobile-menu"
-          >
-            <Icon name="heroicons:bars-3" class="w-5 h-5" id="hamburger-icon" />
-            <Icon
-              name="heroicons:x-mark"
-              class="w-5 h-5 hidden"
-              id="close-icon"
-            />
-          </button>
-        </div>
-      </nav>
+						aria-label="Toggle menu"
+						aria-expanded="false"
+						aria-controls="mobile-menu"
+					>
+						<Icon name="heroicons:bars-3" class="w-5 h-5" id="hamburger-icon" />
+						<Icon
+							name="heroicons:x-mark"
+							class="w-5 h-5 hidden"
+							id="close-icon"
+						/>
+					</button>
+				</div>
+			</nav>
 
-      <!-- Mobile menu (expands below the pill) -->
-      <div
-        id="mobile-menu"
-        class="hidden lg:hidden mt-2 rounded-2xl overflow-hidden
+			<!-- Mobile menu (expands below the pill) -->
+			<div
+				id="mobile-menu"
+				class="hidden lg:hidden mt-2 rounded-2xl overflow-hidden
                bg-white/95 dark:bg-hive-dark/95 backdrop-blur-xl
                border border-black/[0.06] dark:border-white/[0.08]
                shadow-[0_8px_32px_rgba(0,0,0,0.12)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
-      >
-        <ul class="px-3 py-3 space-y-0.5">
-          {
-            [...primaryNav, ...moreNav].map((link) => (
-              <li>
-                <a
-                  href={link.href}
-                  target={
-                    "external" in link && link.external ? "_blank" : undefined
-                  }
-                  rel={
-                    "external" in link && link.external
-                      ? "noopener noreferrer"
-                      : undefined
-                  }
-                  class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium
+			>
+				<ul class="px-3 py-3 space-y-0.5">
+					{
+						[...primaryNav, ...moreNav].map((link) => (
+							<li>
+								<a
+									href={link.href}
+									target={
+										"external" in link && link.external ? "_blank" : undefined
+									}
+									rel={
+										"external" in link && link.external
+											? "noopener noreferrer"
+											: undefined
+									}
+									class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium
                        text-gray-700 dark:text-gray-200
                        hover:text-hive-blue dark:hover:text-hive-cyan
                        hover:bg-black/5 dark:hover:bg-white/10
                        transition-colors duration-150"
-                >
-                  {link.label}
-                  {"external" in link && link.external && (
-                    <Icon
-                      name="heroicons:arrow-top-right-on-square"
-                      class="w-3.5 h-3.5 opacity-40 ml-auto shrink-0"
-                    />
-                  )}
-                </a>
-              </li>
-            ))
-          }
-          <li class="pt-1 pb-0.5">
-            <a
-              href={SITE.liveDashboard}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="flex items-center justify-center gap-2 w-full px-4 py-3 rounded-xl
+								>
+									{link.label}
+									{"external" in link && link.external && (
+										<Icon
+											name="heroicons:arrow-top-right-on-square"
+											class="w-3.5 h-3.5 opacity-40 ml-auto shrink-0"
+										/>
+									)}
+								</a>
+							</li>
+						))
+					}
+					<li class="pt-1 pb-0.5">
+						<a
+							href={SITE.liveDashboard}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="flex items-center justify-center gap-2 w-full px-4 py-3 rounded-xl
                      bg-hive-yellow text-hive-dark text-sm font-semibold
                      hover:bg-hive-yellow-dark transition-colors duration-150"
-            >
-              <LiveDot />
-              Live Dashboard
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
+						>
+							<LiveDot />
+							Live Dashboard
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
 </div>
 
 <script>
-  // ── Keep --header-height CSS var in sync with actual rendered header ────────
-  const header = document.getElementById("site-header") as HTMLElement | null;
+	// ── Keep --header-height CSS var in sync with actual rendered header ────────
+	const header = document.getElementById("site-header") as HTMLElement | null;
 
-  function syncHeaderHeight() {
-    if (!header) return;
-    const h = header.getBoundingClientRect().height;
-    document.documentElement.style.setProperty("--header-height", `${h}px`);
-  }
+	function syncHeaderHeight() {
+		if (!header) return;
+		const h = header.getBoundingClientRect().height;
+		document.documentElement.style.setProperty("--header-height", `${h}px`);
+	}
 
-  // ── Dark mode toggle ────────────────────────────────────────────────────────
-  document.getElementById("theme-toggle")?.addEventListener("click", () => {
-    const isDark = document.documentElement.classList.toggle("dark");
-    localStorage.setItem("hive-theme", isDark ? "dark" : "light");
-  });
+	// ── Dark mode toggle ────────────────────────────────────────────────────────
+	document.getElementById("theme-toggle")?.addEventListener("click", () => {
+		const isDark = document.documentElement.classList.toggle("dark");
+		localStorage.setItem("hive-theme", isDark ? "dark" : "light");
+	});
 
-  // ── Mobile menu ─────────────────────────────────────────────────────────────
-  const mobileToggle = document.getElementById("mobile-menu-toggle");
-  const mobileMenu = document.getElementById("mobile-menu");
-  const hamburger = document.getElementById("hamburger-icon");
-  const closeIcon = document.getElementById("close-icon");
+	// ── Mobile menu ─────────────────────────────────────────────────────────────
+	const mobileToggle = document.getElementById("mobile-menu-toggle");
+	const mobileMenu = document.getElementById("mobile-menu");
+	const hamburger = document.getElementById("hamburger-icon");
+	const closeIcon = document.getElementById("close-icon");
 
-  mobileToggle?.addEventListener("click", () => {
-    const isOpen = !mobileMenu?.classList.contains("hidden");
-    mobileMenu?.classList.toggle("hidden");
-    mobileToggle.setAttribute("aria-expanded", String(!isOpen));
-    hamburger?.classList.toggle("hidden", !isOpen);
-    closeIcon?.classList.toggle("hidden", isOpen);
-    syncHeaderHeight();
-  });
+	mobileToggle?.addEventListener("click", () => {
+		const isOpen = !mobileMenu?.classList.contains("hidden");
+		mobileMenu?.classList.toggle("hidden");
+		mobileToggle.setAttribute("aria-expanded", String(!isOpen));
+		hamburger?.classList.toggle("hidden", !isOpen);
+		closeIcon?.classList.toggle("hidden", isOpen);
+		syncHeaderHeight();
+	});
 
-  window.addEventListener("resize", () => {
-    if (window.innerWidth >= 1024) {
-      mobileMenu?.classList.add("hidden");
-      hamburger?.classList.remove("hidden");
-      closeIcon?.classList.add("hidden");
-    }
-    syncHeaderHeight();
-  });
+	window.addEventListener("resize", () => {
+		if (window.innerWidth >= 1024) {
+			mobileMenu?.classList.add("hidden");
+			hamburger?.classList.remove("hidden");
+			closeIcon?.classList.add("hidden");
+		}
+		syncHeaderHeight();
+	});
 
-  // ── Announcement banner ─────────────────────────────────────────────────────
-  // The strip is rendered hidden (display:none). We evaluate all conditions
-  // here and reveal it only when appropriate — no flash for dismissed users.
-  interface AnnouncementData {
-    id: string;
-    active: boolean;
-    message: string;
-    href?: string;
-    linkText?: string;
-    showAfter?: string;
-    hideAfter?: string;
-  }
+	// ── Announcement banner ─────────────────────────────────────────────────────
+	// The strip is rendered hidden (display:none). We evaluate all conditions
+	// here and reveal it only when appropriate — no flash for dismissed users.
+	interface AnnouncementData {
+		id: string;
+		active: boolean;
+		message: string;
+		href?: string;
+		linkText?: string;
+		showAfter?: string;
+		hideAfter?: string;
+	}
 
-  function evaluateAnnouncement() {
-    const strip = document.getElementById(
-      "announcement-strip",
-    ) as HTMLElement | null;
-    if (!strip) return;
+	function evaluateAnnouncement() {
+		const strip = document.getElementById(
+			"announcement-strip",
+		) as HTMLElement | null;
+		if (!strip) return;
 
-    const data: AnnouncementData = JSON.parse(
-      strip.dataset.announcement ?? "null",
-    );
-    if (!data) return;
+		const data: AnnouncementData = JSON.parse(
+			strip.dataset.announcement ?? "null",
+		);
+		if (!data) return;
 
-    // 1. Master switch
-    if (!data.active) return;
+		// 1. Master switch
+		if (!data.active) return;
 
-    // 2. Date-range check (client-side, using today's date)
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    if (data.showAfter) {
-      const from = new Date(data.showAfter);
-      if (today < from) return;
-    }
-    if (data.hideAfter) {
-      const until = new Date(data.hideAfter);
-      if (today >= until) return;
-    }
+		// 2. Date-range check (client-side, using today's date)
+		const today = new Date();
+		today.setHours(0, 0, 0, 0);
+		if (data.showAfter) {
+			const from = new Date(data.showAfter);
+			if (today < from) return;
+		}
+		if (data.hideAfter) {
+			const until = new Date(data.hideAfter);
+			if (today >= until) return;
+		}
 
-    // 3. Dismissal check
-    const storageKey = `hive-dismissed-${data.id}`;
-    if (localStorage.getItem(storageKey)) return;
+		// 3. Dismissal check
+		const storageKey = `hive-dismissed-${data.id}`;
+		if (localStorage.getItem(storageKey)) return;
 
-    // All conditions pass — build the content and reveal the strip
-    const textEl = document.getElementById("announcement-text");
-    if (textEl) {
-      textEl.textContent = data.message;
-      if (data.href) {
-        const link = document.createElement("a");
-        link.href = data.href;
-        link.textContent = data.linkText ?? "Learn more →";
-        link.className =
-          "ml-2 font-semibold underline underline-offset-2 hover:text-hive-yellow transition-colors";
-        textEl.appendChild(link);
-      }
-    }
+		// All conditions pass — build the content and reveal the strip
+		const textEl = document.getElementById("announcement-text");
+		if (textEl) {
+			textEl.textContent = data.message;
+			if (data.href) {
+				const link = document.createElement("a");
+				link.href = data.href;
+				link.textContent = data.linkText ?? "Learn more →";
+				link.className =
+					"ml-2 font-semibold underline underline-offset-2 hover:text-hive-yellow transition-colors";
+				textEl.appendChild(link);
+			}
+		}
 
-    strip.style.display = "flex";
-    syncHeaderHeight();
+		strip.style.display = "flex";
+		syncHeaderHeight();
 
-    // Wire up dismiss button
-    document
-      .getElementById("dismiss-announcement")
-      ?.addEventListener("click", () => {
-        strip.style.display = "none";
-        localStorage.setItem(storageKey, "1");
-        syncHeaderHeight();
-      });
-  }
+		// Wire up dismiss button
+		document
+			.getElementById("dismiss-announcement")
+			?.addEventListener("click", () => {
+				strip.style.display = "none";
+				localStorage.setItem(storageKey, "1");
+				syncHeaderHeight();
+			});
+	}
 
-  // Run immediately (DOM is ready at this point in Astro's hydration)
-  evaluateAnnouncement();
+	// Run immediately (DOM is ready at this point in Astro's hydration)
+	evaluateAnnouncement();
 
-  // ── More dropdown (hover with delay to survive the gap) ────────────────────
-  // Pure CSS group-hover fails because the absolute-positioned menu is 8px
-  // below the <li> boundary — the mouse briefly leaves the group while
-  // crossing that gap. A short close-delay lets the mouse travel across it.
-  const moreDropdown = document.getElementById("more-dropdown");
-  const moreMenu = document.getElementById(
-    "more-dropdown-menu",
-  ) as HTMLElement | null;
-  const moreTrigger = document.getElementById("more-dropdown-trigger");
-  const moreChevron = document.getElementById("more-dropdown-chevron");
-  let moreCloseTimer: ReturnType<typeof setTimeout> | null = null;
+	// ── More dropdown (hover with delay to survive the gap) ────────────────────
+	// Pure CSS group-hover fails because the absolute-positioned menu is 8px
+	// below the <li> boundary — the mouse briefly leaves the group while
+	// crossing that gap. A short close-delay lets the mouse travel across it.
+	const moreDropdown = document.getElementById("more-dropdown");
+	const moreMenu = document.getElementById(
+		"more-dropdown-menu",
+	) as HTMLElement | null;
+	const moreTrigger = document.getElementById("more-dropdown-trigger");
+	const moreChevron = document.getElementById("more-dropdown-chevron");
+	let moreCloseTimer: ReturnType<typeof setTimeout> | null = null;
 
-  function openMore() {
-    if (moreCloseTimer) {
-      clearTimeout(moreCloseTimer);
-      moreCloseTimer = null;
-    }
-    if (!moreMenu) return;
-    moreMenu.classList.remove(
-      "opacity-0",
-      "invisible",
-      "pointer-events-none",
-      "-translate-y-1",
-    );
-    moreMenu.classList.add(
-      "opacity-100",
-      "visible",
-      "pointer-events-auto",
-      "translate-y-0",
-    );
-    moreTrigger?.setAttribute("aria-expanded", "true");
-    moreChevron?.classList.add("rotate-180");
-  }
+	function openMore() {
+		if (moreCloseTimer) {
+			clearTimeout(moreCloseTimer);
+			moreCloseTimer = null;
+		}
+		if (!moreMenu) return;
+		moreMenu.classList.remove(
+			"opacity-0",
+			"invisible",
+			"pointer-events-none",
+			"-translate-y-1",
+		);
+		moreMenu.classList.add(
+			"opacity-100",
+			"visible",
+			"pointer-events-auto",
+			"translate-y-0",
+		);
+		moreTrigger?.setAttribute("aria-expanded", "true");
+		moreChevron?.classList.add("rotate-180");
+	}
 
-  function closeMore() {
-    if (moreCloseTimer) clearTimeout(moreCloseTimer);
-    moreCloseTimer = setTimeout(() => {
-      if (!moreMenu) return;
-      moreMenu.classList.remove(
-        "opacity-100",
-        "visible",
-        "pointer-events-auto",
-        "translate-y-0",
-      );
-      moreMenu.classList.add(
-        "opacity-0",
-        "invisible",
-        "pointer-events-none",
-        "-translate-y-1",
-      );
-      moreTrigger?.setAttribute("aria-expanded", "false");
-      moreChevron?.classList.remove("rotate-180");
-    }, 150);
-  }
+	function closeMore() {
+		if (moreCloseTimer) clearTimeout(moreCloseTimer);
+		moreCloseTimer = setTimeout(() => {
+			if (!moreMenu) return;
+			moreMenu.classList.remove(
+				"opacity-100",
+				"visible",
+				"pointer-events-auto",
+				"translate-y-0",
+			);
+			moreMenu.classList.add(
+				"opacity-0",
+				"invisible",
+				"pointer-events-none",
+				"-translate-y-1",
+			);
+			moreTrigger?.setAttribute("aria-expanded", "false");
+			moreChevron?.classList.remove("rotate-180");
+		}, 150);
+	}
 
-  moreDropdown?.addEventListener("mouseenter", openMore);
-  moreDropdown?.addEventListener("mouseleave", closeMore);
+	moreDropdown?.addEventListener("mouseenter", openMore);
+	moreDropdown?.addEventListener("mouseleave", closeMore);
 
-  // Sync on load and after fonts settle
-  syncHeaderHeight();
-  window.addEventListener("load", syncHeaderHeight);
+	// Sync on load and after fonts settle
+	syncHeaderHeight();
+	window.addEventListener("load", syncHeaderHeight);
 </script>

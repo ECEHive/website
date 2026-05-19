@@ -9,14 +9,14 @@ import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
-  site: process.env.SITE_URL || "https://hive.ece.gatech.edu",
-  vite: {
-    plugins: [tailwindcss()],
-  },
-  integrations: [mdx(), icon(), sitemap()],
-  markdown: {
-    shikiConfig: {
-      theme: "github-dark",
-    },
-  },
+	site: process.env.SITE_URL || "https://hive.ece.gatech.edu",
+	vite: {
+		plugins: [tailwindcss()],
+	},
+	integrations: [mdx(), icon(), sitemap()],
+	markdown: {
+		shikiConfig: {
+			theme: "github-dark",
+		},
+	},
 });

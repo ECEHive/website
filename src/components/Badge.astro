@@ -7,30 +7,30 @@
  *  class   — extra classes
  */
 interface Props {
-  variant?: "purple" | "blue" | "gold" | "green" | "red" | "gray";
-  class?: string;
+	variant?: "purple" | "blue" | "gold" | "green" | "red" | "gray";
+	class?: string;
 }
 
 const { variant = "purple", class: extraClass = "" } = Astro.props;
 
 const variantClasses: Record<string, string> = {
-  purple:
-    "bg-hive-purple/10 text-hive-purple dark:bg-hive-purple/20 dark:text-hive-purple-light",
-  blue: "bg-hive-blue/10 text-hive-blue dark:bg-hive-blue/20 dark:text-blue-300",
-  gold: "bg-gt-gold/20 text-gt-gold-dark dark:bg-gt-gold/15 dark:text-gt-gold-light",
-  green:
-    "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400",
-  red: "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400",
-  gray: "bg-gray-100 text-gray-600 dark:bg-white/10 dark:text-gray-300",
+	purple:
+		"bg-hive-purple/10 text-hive-purple dark:bg-hive-purple/20 dark:text-hive-purple-light",
+	blue: "bg-hive-blue/10 text-hive-blue dark:bg-hive-blue/20 dark:text-blue-300",
+	gold: "bg-gt-gold/20 text-gt-gold-dark dark:bg-gt-gold/15 dark:text-gt-gold-light",
+	green:
+		"bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400",
+	red: "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400",
+	gray: "bg-gray-100 text-gray-600 dark:bg-white/10 dark:text-gray-300",
 };
 ---
 
 <span
-  class:list={[
-    "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium font-body",
-    variantClasses[variant],
-    extraClass,
-  ]}
+	class:list={[
+		"inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium font-body",
+		variantClasses[variant],
+		extraClass,
+	]}
 >
-  <slot />
+	<slot />
 </span>

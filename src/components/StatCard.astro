@@ -8,35 +8,35 @@
  *  icon  — optional emoji or short SVG
  */
 interface Props {
-  value: string;
-  label: string;
-  icon?: string;
+	value: string;
+	label: string;
+	icon?: string;
 }
 
 const { value, label, icon } = Astro.props;
 ---
 
 <div
-  class="flex flex-col items-center text-center px-6 py-8
+	class="flex flex-col items-center text-center px-6 py-8
             rounded-2xl bg-white dark:bg-white/5
             border border-gray-200 dark:border-white/10
             shadow-sm"
 >
-  {
-    icon && (
-      <span class="text-3xl mb-3 leading-none select-none" aria-hidden="true">
-        {icon}
-      </span>
-    )
-  }
-  <span
-    class="font-heading font-black text-4xl md:text-5xl text-hive-purple dark:text-hive-purple-light mb-2"
-  >
-    {value}
-  </span>
-  <span
-    class="text-sm font-medium text-gray-600 dark:text-gray-400 leading-snug max-w-[12ch] mx-auto"
-  >
-    {label}
-  </span>
+	{
+		icon && (
+			<span class="text-3xl mb-3 leading-none select-none" aria-hidden="true">
+				{icon}
+			</span>
+		)
+	}
+	<span
+		class="font-heading font-black text-4xl md:text-5xl text-hive-purple dark:text-hive-purple-light mb-2"
+	>
+		{value}
+	</span>
+	<span
+		class="text-sm font-medium text-gray-600 dark:text-gray-400 leading-snug max-w-[12ch] mx-auto"
+	>
+		{label}
+	</span>
 </div>
