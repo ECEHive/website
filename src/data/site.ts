@@ -12,7 +12,7 @@ export const SITE = {
 	email: "hive@ece.gatech.edu",
 
 	address: {
-		building: "Van Leer Building, Room C144",
+		building: "Van Leer Building",
 		street: "777 Atlantic Drive NW",
 		city: "Atlanta",
 		state: "GA",
