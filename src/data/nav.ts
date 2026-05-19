@@ -1,3 +1,5 @@
+import { SITE } from "./site";
+
 /**
  * Navigation data — shared between Navbar and Footer.
  * Update links here; both components pick up changes automatically.
@@ -23,7 +25,7 @@ export const moreNav: NavLink[] = [
 	{ label: "HUMS", href: "https://hums.hivemakerspace.com/", external: true },
 	{
 		label: "Hive Wiki",
-		href: "https://hive.ece.gatech.edu/hive-wiki/",
+		href: SITE.wiki,
 		external: true,
 	},
 ];
@@ -50,12 +52,12 @@ export const footerSections = [
 			},
 			{
 				label: "Hive Wiki",
-				href: "https://hive.ece.gatech.edu/hive-wiki/",
+				href: SITE.wiki,
 				external: true,
 			},
 			{
 				label: "Live Dashboard",
-				href: "https://hive.ece.gatech.edu/live-dashboard/",
+				href: SITE.liveDashboard,
 				external: true,
 			},
 		] as NavLink[],
