@@ -2,7 +2,7 @@
 name: "Embedded Systems"
 category: "Embedded Systems"
 description: "Checkouts of microcontrollers and single-board computers — Arduinos, Raspberry Pis, TI LaunchPads, Adafruit boards, and more — for a two-week loan period."
-icon: "🤖"
+icon: "heroicons:cpu-chip"
 difficulty: "Beginner"
 requiresTraining: false
 featured: false

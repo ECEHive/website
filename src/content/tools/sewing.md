@@ -2,7 +2,7 @@
 name: "Crafts Area"
 category: "Crafts & Textiles"
 description: "Vinyl cutters, dye sublimation, sewing/embroidery, and a button press for crafting, custom apparel, stickers, and wearable projects. Located near the benchtop desks."
-icon: "🧵"
+icon: "heroicons:square-3-stack-3d"
 difficulty: "Beginner"
 requiresTraining: false
 featured: false

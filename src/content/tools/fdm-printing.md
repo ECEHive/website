@@ -2,7 +2,7 @@
 name: "FDM 3D Printing"
 category: "3D Printing"
 description: "Fused Deposition Modeling printers for rapid prototyping with PLA, PETG, and ABS. Perfect for mechanical parts, enclosures, and concept models."
-icon: "🖨️"
+icon: "heroicons:cube"
 difficulty: "Beginner"
 requiresTraining: false
 featured: true

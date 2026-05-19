@@ -2,7 +2,7 @@
 name: "Resin 3D Printing"
 category: "3D Printing"
 description: "High-resolution SLA/MSLA printers for detailed models, miniatures, jewelry, and dental/biomedical applications."
-icon: "✨"
+icon: "heroicons:sparkles"
 difficulty: "Intermediate"
 requiresTraining: true
 featured: false

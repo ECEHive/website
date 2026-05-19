@@ -124,7 +124,10 @@ import { SITE } from "../data/site";
 			{
 				equipmentHighlights.map((item) => (
 					<Card href={item.href} padding="normal" class="group">
-						<div class="text-4xl mb-4 leading-none">{item.icon}</div>
+						<Icon
+							name={item.icon}
+							class="w-10 h-10 mb-4 text-hive-purple dark:text-hive-purple-light"
+						/>
 						<h3 class="font-heading font-bold text-lg text-gray-900 dark:text-white mb-2">
 							{item.title}
 						</h3>

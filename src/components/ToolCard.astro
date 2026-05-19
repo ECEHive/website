@@ -6,7 +6,7 @@
  *  name            — tool display name
  *  category        — equipment category label
  *  description     — short description
- *  icon            — emoji or SVG string
+ *  icon            — heroicon name (e.g., "heroicons:wrench")
  *  difficulty      — 'Beginner' | 'Intermediate' | 'Advanced'
  *  requiresTraining — show training badge
  *  slug            — URL slug for a detail page (optional)
@@ -28,7 +28,7 @@ const {
 	name,
 	category,
 	description,
-	icon = "🔧",
+	icon = "heroicons:wrench",
 	difficulty,
 	requiresTraining = false,
 	slug,
@@ -49,9 +49,10 @@ const difficultyVariant: Record<string, "green" | "gold" | "red"> = {
 >
 	<!-- Icon header -->
 	<div class="flex items-center justify-between px-6 pt-6 pb-4">
-		<span class="text-4xl leading-none select-none" aria-hidden="true"
-			>{icon}</span
-		>
+		<Icon
+			name={icon}
+			class="w-10 h-10 text-hive-purple dark:text-hive-purple-light"
+		/>
 		<div class="flex flex-wrap gap-1.5 justify-end">
 			{
 				difficulty && (

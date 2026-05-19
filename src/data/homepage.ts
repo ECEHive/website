@@ -17,49 +17,57 @@ export interface EquipmentHighlight {
 }
 
 export const stats: Stat[] = [
-	{ value: "6+", label: "Equipment Categories", icon: "🛠️" },
-	{ value: "Free", label: "For GT Students, Faculty, and Staff", icon: "🎓" },
-	{ value: "200+", label: "Volunteer Peer Instructors", icon: "👩‍🏫" },
-	{ value: "25+", label: "Workshops per Semester", icon: "🎉" },
+	{ value: "6+", label: "Equipment Categories", icon: "heroicons:wrench" },
+	{
+		value: "Free",
+		label: "For GT Students, Faculty, and Staff",
+		icon: "heroicons:academic-cap",
+	},
+	{
+		value: "200+",
+		label: "Volunteer Peer Instructors",
+		icon: "heroicons:user-group",
+	},
+	{ value: "25+", label: "Workshops per Semester", icon: "heroicons:sparkles" },
 ];
 
 export const equipmentHighlights: EquipmentHighlight[] = [
 	{
-		icon: "🖨️",
+		icon: "heroicons:cube",
 		title: "3D Printing",
 		description:
 			"FDM and resin printers for rapid prototyping, models, and mechanical parts.",
 		href: "/explore#3d-printing",
 	},
 	{
-		icon: "🔆",
+		icon: "heroicons:sun",
 		title: "Laser Cutting",
 		description:
 			'Two CO₂ laser cutters (32"×18" bed) plus a Fablight 4500 fiber laser for cutting metals.',
 		href: "/explore#laser-cutting",
 	},
 	{
-		icon: "⚡",
+		icon: "heroicons:bolt",
 		title: "Electronics Benchtop",
 		description:
 			"24 individual benchtops with soldering, oscilloscopes, function generators, power supplies, and more.",
 		href: "/explore#electronics",
 	},
 	{
-		icon: "🟢",
+		icon: "heroicons:circle-stack",
 		title: "PCB Fabrication",
 		description: "In-house PCB milling and laser etching with LPKF tools.",
 		href: "/explore#pcb-fabrication",
 	},
 	{
-		icon: "✂️",
+		icon: "heroicons:scissors",
 		title: "Crafts Area",
 		description:
 			"Silhouette Cameo vinyl cutters, dye sublimation, sewing, and a button press.",
 		href: "/explore#crafts--textiles",
 	},
 	{
-		icon: "🪚",
+		icon: "heroicons:wrench-screwdriver",
 		title: "Machine Shop",
 		description:
 			"Miter saw, drill press, band saw, scroll saw, belt sanders, and a sandblasting booth.",
