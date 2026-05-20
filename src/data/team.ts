@@ -6,6 +6,8 @@
 export interface StaffMember {
 	name: string;
 	role: string;
+	/** GT account username (e.g. "kpham30") — used to resolve a profile photo if one exists */
+	username?: string;
 }
 
 export interface MpiGroup {
@@ -16,22 +18,21 @@ export interface MpiGroup {
 }
 
 export const idcStaff: StaffMember[] = [
-	{ name: "Kevin Pham", role: "IDC Director" },
-	{ name: "Stevie Limon", role: "Assistant Director" },
+	{ name: "Kevin Pham", role: "IDC Director", username: "kpham30" },
+	{ name: "Stevie Limon", role: "Assistant Director", username: "elimon3" },
 	{ name: "Jacob Dudik", role: "GTA" },
-	{ name: "Amanda Wang", role: "UTA" },
-	{ name: "Andrew Lemons", role: "UTA" },
-	{ name: "Nem Rentz", role: "UTA" },
-	{ name: "William Castro", role: "UTA" },
-	{ name: "Eleanor Tracy", role: "UTA" },
+	{ name: "Amanda Wang", role: "UTA", username: "awang409" },
+	{ name: "Andrew Lemons", role: "UTA", username: "alemons8" },
+	{ name: "Nem Rentz", role: "UTA", username: "erentz3" },
+	{ name: "William Castro", role: "UTA", username: "wcastro8" },
+	{ name: "Eleanor Tracy", role: "UTA", username: "etracy8" },
 ];
 
 export const execBoard: StaffMember[] = [
-	{ name: "Anupama Bagade", role: "Strategy" },
-	{ name: "Colin Hartigan", role: "Operations" },
-	{ name: "Veronica Mok", role: "Operations" },
-	{ name: "Amanda Tang", role: "Events" },
-	{ name: "Laura Huff", role: "Outreach" },
+	{ name: "Alexey Tatarinov", role: "Strategy", username: "atatarinov3" },
+	{ name: "Amulya Jain", role: "Technology", username: "ajain842" },
+	{ name: "Femke Kovoor", role: "Community", username: "fkovoor3" },
+	{ name: "Sameer Godbole", role: "Human Resources", username: "sgodbole9" },
 ];
 
 export const mpiGroups: MpiGroup[] = [

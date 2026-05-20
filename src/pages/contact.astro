@@ -7,10 +7,26 @@ import Button from "../components/Button.astro";
 import PageHero from "../components/PageHero.astro";
 import ContactDetail from "../components/ContactDetail.astro";
 import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
 import { getCollection, render } from "astro:content";
 import { detailedCurrentHours } from "../data/hours";
 import { idcStaff, execBoard, mpiGroups } from "../data/team";
 import { SITE } from "../data/site";
+
+const peopleImages = import.meta.glob<{ default: ImageMetadata }>(
+	"../assets/people/*.{png,jpg,jpeg,webp}",
+	{ eager: true },
+);
+function getPersonPhoto(username: string | undefined) {
+	if (!username) return null;
+	return (
+		peopleImages[`../assets/people/${username}.png`]?.default ??
+		peopleImages[`../assets/people/${username}.jpg`]?.default ??
+		peopleImages[`../assets/people/${username}.jpeg`]?.default ??
+		peopleImages[`../assets/people/${username}.webp`]?.default ??
+		null
+	);
+}
 
 const allFAQs = await getCollection("faq");
 const faqs = await Promise.all(
@@ -149,14 +165,39 @@ const faqs = await Promise.all(
 				</h3>
 				<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
 					{
-						execBoard.map((m) => (
-							<div class="rounded-xl border border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 px-5 py-4">
-								<p class="font-semibold text-gray-900 dark:text-white">
-									{m.name}
-								</p>
-								<p class="text-sm text-gray-500 dark:text-gray-400">{m.role}</p>
-							</div>
-						))
+						execBoard.map((m) => {
+							const photo = getPersonPhoto(m.username);
+							return (
+								<div class="rounded-xl border border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 px-5 py-4 flex items-center gap-4">
+									{photo && (
+										<Image
+											src={photo}
+											alt={m.name}
+											width={64}
+											height={64}
+											class="w-12 h-12 rounded-full object-cover flex-shrink-0"
+										/>
+									)}
+									<div>
+										<p class="font-semibold text-gray-900 dark:text-white">
+											{m.name}
+										</p>
+										<p class="text-sm text-gray-500 dark:text-gray-400">
+											{m.role}
+										</p>
+									</div>
+									{m.username && (
+										<a
+											href={`mailto:${m.username}@gatech.edu`}
+											aria-label={`Email ${m.name}`}
+											class="ml-auto text-gray-400 hover:text-hive-purple dark:hover:text-hive-purple-light transition-colors flex-shrink-0"
+										>
+											<Icon name="heroicons:envelope" class="w-5 h-5" />
+										</a>
+									)}
+								</div>
+							);
+						})
 					}
 				</div>
 			</div>
@@ -170,14 +211,39 @@ const faqs = await Promise.all(
 				</h3>
 				<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
 					{
-						idcStaff.map((m) => (
-							<div class="rounded-xl border border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 px-5 py-4">
-								<p class="font-semibold text-gray-900 dark:text-white">
-									{m.name}
-								</p>
-								<p class="text-sm text-gray-500 dark:text-gray-400">{m.role}</p>
-							</div>
-						))
+						idcStaff.map((m) => {
+							const photo = getPersonPhoto(m.username);
+							return (
+								<div class="rounded-xl border border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 px-5 py-4 flex items-center gap-4">
+									{photo && (
+										<Image
+											src={photo}
+											alt={m.name}
+											width={64}
+											height={64}
+											class="w-12 h-12 rounded-full object-cover flex-shrink-0"
+										/>
+									)}
+									<div>
+										<p class="font-semibold text-gray-900 dark:text-white">
+											{m.name}
+										</p>
+										<p class="text-sm text-gray-500 dark:text-gray-400">
+											{m.role}
+										</p>
+									</div>
+									{m.username && (
+										<a
+											href={`mailto:${m.username}@gatech.edu`}
+											aria-label={`Email ${m.name}`}
+											class="ml-auto text-gray-400 hover:text-hive-purple dark:hover:text-hive-purple-light transition-colors flex-shrink-0"
+										>
+											<Icon name="heroicons:envelope" class="w-5 h-5" />
+										</a>
+									)}
+								</div>
+							);
+						})
 					}
 				</div>
 			</div>
