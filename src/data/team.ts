@@ -20,7 +20,6 @@ export interface MpiGroup {
 export const idcStaff: StaffMember[] = [
 	{ name: "Kevin Pham", role: "IDC Director", username: "kpham30" },
 	{ name: "Stevie Limon", role: "Assistant Director", username: "elimon3" },
-	{ name: "Jacob Dudik", role: "GTA" },
 	{ name: "Amanda Wang", role: "UTA", username: "awang409" },
 	{ name: "Andrew Lemons", role: "UTA", username: "alemons8" },
 	{ name: "Nem Rentz", role: "UTA", username: "erentz3" },
@@ -29,10 +28,18 @@ export const idcStaff: StaffMember[] = [
 ];
 
 export const execBoard: StaffMember[] = [
-	{ name: "Alexey Tatarinov", role: "Strategy", username: "atatarinov3" },
-	{ name: "Amulya Jain", role: "Technology", username: "ajain842" },
-	{ name: "Femke Kovoor", role: "Community", username: "fkovoor3" },
-	{ name: "Sameer Godbole", role: "Human Resources", username: "sgodbole9" },
+	{
+		name: "Alexey Tatarinov",
+		role: "Director of Strategy",
+		username: "atatarinov3",
+	},
+	{ name: "Amulya Jain", role: "Director of Technology", username: "ajain842" },
+	{ name: "Femke Kovoor", role: "Director of Community", username: "fkovoor3" },
+	{
+		name: "Sameer Godbole",
+		role: "Director of Human Resources",
+		username: "sgodbole9",
+	},
 ];
 
 export const mpiGroups: MpiGroup[] = [
